@@ -26,6 +26,14 @@ class Login extends React.Component{
             this.setState({passwordInput:true});
             this.setState({displayText:'Password Cannot be empty !'});
         }
+        else if(!this.validateEmail(this.state.useremail)){
+            this.setState({emailInput:true});
+            this.setState({displayText:'Invalid email id!'});
+        }
+        else if(this.state.password.length < 8){
+            this.setState({passwordInput:true});
+            this.setState({displayText:'Password length less than 8 char !'});
+        }
         else{
             this.loginUser(this.state.useremail,this.state.password);
         }
@@ -50,6 +58,7 @@ class Login extends React.Component{
             this.setState({loading: false});
             console.log(res);
             if(res.response){
+                console.log("into respoonse if");
                 this.props.dispatch(login(res.response));
                 this.props.dispatch(addUser(res.data));
                 this.setState({loggendIn:true});
@@ -58,6 +67,11 @@ class Login extends React.Component{
                 this.setState({displayText:res.message});
             }
         })
+    }
+
+    validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     }
 
     changeEmail(e){

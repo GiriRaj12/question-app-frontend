@@ -20,6 +20,7 @@ class App extends React.Component {
           method:'GET',
           headers: { 'Content-Type': 'application/json' }
      }
+     
     fetch("https://quiet-shelf-71244.herokuapp.com/session/check",headder)
       .then(res => res.json())
       .then(res => {
