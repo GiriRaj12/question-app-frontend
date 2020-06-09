@@ -148,5 +148,7 @@
 @media screen and (max-width:650px){
     .choiseContainer{
         margin-top:0;
+        grid-template-columns: auto auto auto ;
     }
+    
 }
